@@ -24,11 +24,24 @@ elem' n (x:xs)
   | x == n = True
   | otherwise = elem' n xs
 
-
 notElem' _ [] = True
 notElem' n (x:xs)
     | x == n = False
     | otherwise = notElem' n xs
 
+head' (x:xs) = x
 
---notElem, head, length, reverse, last, tail, init, max, min, minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3, sum, product, splitAt, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
+length' [] = 0
+length' (x:xs) = 1 + length' xs
+
+--reverse' [] = []
+--reverse' (x:xs) = reverse' xs (: x)
+
+last' [x] = x
+last' (x:xs) = last' xs
+
+tail' [] = []
+tail' (x:xs) = xs
+
+
+--init, max, min, minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3, sum, product, splitAt, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
