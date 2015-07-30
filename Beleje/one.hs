@@ -145,3 +145,33 @@ belIntersperse a (x:xs)
   | otherwise = x:a:(belIntersperse a xs)
 
 -- INTERCALATE KW
+belIntercalate _ [[]] = []
+belIntercalate l (y:ys)
+  | ys == [] = y
+  | otherwise = y ++ l ++ (belIntercalate l ys)
+
+-- AND KW
+belAnd [] = True
+belAnd (x:xs)
+  | x == True = (belAnd xs)
+  | otherwise = False
+
+-- OR KW
+belOr [] = False
+belOr (x:xs)
+  | x == True = True
+  | otherwise = (belOr xs)
+
+-- ZIP3 KW
+belZip3 [] _ _ = []
+belZip3 _ [] _ = []
+belZip3 _ _ [] = []
+belZip3 (x:xs) (y:ys) (z:zs) = [(x, y, z)] ++ (belZip3 xs ys zs)
+
+-- SUM KW
+belSum [] = 0
+belSum (x:xs) = belFoldl1 (+) (x:xs)
+
+-- PRODUCT KW
+belProduct [] = 1
+belProduct (x:xs) = belFoldl1 (*) (x:xs)
