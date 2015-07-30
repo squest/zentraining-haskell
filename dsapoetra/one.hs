@@ -26,9 +26,6 @@ fak x
 fak2 0 = 1
 fak2 i = i * (fak2 $ pred i)
 
-sum' []=0
-sum' (x:xs) = x + (sum' xs)
-
 -- isPrime x
   -- | x < 2 = False
   -- | x == 2 = True
@@ -54,17 +51,40 @@ sum' (x:xs) = x + (sum' xs)
 -- do not use any other function except : pred, succ, ++, :, pattern matching, |
 --pattern match use only (x:xs)/(x:[]). do not use (x:y:xs)
 
--- null, take, drop, fst, snd, map, filter, delete, deleteAll, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
---csort, scanl, scanl1, elem, notElem, head, length, reverse, last, tail, init, max, min, concat, intersperse, intercalate, and, or, zip3, sum,
+-- null X, take, drop, fst X, snd X, map, filter, delete, deleteAll, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
+--csort, scanl, scanl1, elem, notElem, head X, length, reverse, last X, tail X, init X, max, min, concat, intersperse, intercalate,
+-- and, or, zip3, sum X,
 --product, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, zipWith3
+
+testcase = [1,2,3,4]
 
 null' [] = True
 null'(x:xs) = False
 
 
-take' i [] = []
-take' i (x:xs)
-  | i <= 1 = [x]
-  | otherwise = ulang i
-  where ulang i
-  |
+--take' i [] = []
+--take' i (x:xs)
+  -- | i <= 1 = [x]
+  -- | otherwise = (take' $ (i-1) (xs))
+
+fst' (x,x2) = x
+
+snd' (x,x2) = x2
+
+head' (x:xs) = x
+
+sum' []=0
+sum' (x:xs) = x + (sum' xs)
+
+last' [x] = x
+last' (x:xs) = last' (xs)
+
+tail' [x] = []
+tail' (x:xs) = xs
+
+init' [x] = []
+init' [x,x2] = [x]
+init' (x:xs) = x:init' xs
+
+and' [] = True
+and' [x] = x
