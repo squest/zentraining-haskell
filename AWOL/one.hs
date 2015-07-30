@@ -86,6 +86,7 @@ minimum' (x:y:xs)
     | xs == [] = if x < y then x else y
     | otherwise = minimum' (y:xs)
 
+
 -- concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
 
 sum' [] = 0
@@ -94,9 +95,9 @@ sum' (x:xs) = x + sum' xs
 product' [] = 1
 product' (x:xs) = x * product' xs
 
---splitAt' 0 _ = []
---splitAt' _ [x] = x
---splitAt' n (x:y:xs) = (x ++ y) : splitAt' (pred n) xs
+--splitAt' n (x:y:xs)
+--  | n == 0 = (x:y:xs)
+--  | = (x ++ y) : splitAt' (pred n) xs
 
 
 --words' "x"
