@@ -34,10 +34,13 @@ map' f (x:xs) = (f x) : map' f xs
 null' [] = True
 null' _ = False
 
-drop' 0 (x:xs) = (x:xs)
+drop' 0 (xs) = (xs)
 drop' _ [] = []
-drop' n (x:xs) = x : drop' (n+1) xs
+drop' n (x:xs) = drop' (n-1) xs
 
 fst' (a, b) = a
 
 snd' (a, b) = b
+
+filter' f [] = []
+filter' f (x:xs) = (f x) : filter' f xs
