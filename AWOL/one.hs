@@ -16,9 +16,10 @@ fst' (a, b) = a
 snd' (a, b) = b
 
 map' _ [] = []
-map' f (x:xs) = [(f x)] ++ [(map' f xs)]
+map' f (x:xs) = [f x] ++ map' f xs
 
---map, filter,
+filter' _ [] = []
+filter' f (x:xs) = if f x then x : filter' f xs else filter' f xs
 
 delete' _ [] = []
 delete' n (x:xs)
@@ -85,6 +86,7 @@ minimum' (x:y:xs)
     | xs == [] = if x < y then x else y
     | otherwise = minimum' (y:xs)
 
+
 -- concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
 
 sum' [] = 0
@@ -93,10 +95,10 @@ sum' (x:xs) = x + sum' xs
 product' [] = 1
 product' (x:xs) = x * product' xs
 
---splitAt' 0 (x:xs) = (x:xs)
---splitAt' n (x:xs)
---  | xs == [] = x
---  | otherwise = 1
+--splitAt' n (x:y:xs)
+--  | n == 0 = (x:y:xs)
+--  | = (x ++ y) : splitAt' (pred n) xs
+
 
 --words' "x"
 --  | x == " " = []
