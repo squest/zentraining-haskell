@@ -84,9 +84,20 @@ nth' (x:xs) 0 = x
 nth' xs a = (nth' (drop' 1 xs) (pred a))
 
 map' f [] = []
-map' f (x:xs) = [f x] ++ (map' f xs)
+map' f (x:xs) = (f x) : (map' f xs)
 
 filter' f [] = []
 filter' f (x:xs)
   | f x = x: (filter' f xs)
   | otherwise = (filter' f xs)
+
+
+deleteAll' a [] = []
+deleteAll' a (x:xs)
+  | a /= x = x: (delete' a xs)
+  | otherwise = (delete' a xs)
+
+delete' a [] = []
+delete' a (x:xs)
+  | a == x = xs
+  | otherwise = delete' a xs
