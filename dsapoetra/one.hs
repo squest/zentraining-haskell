@@ -51,8 +51,8 @@ isPrime x
 -- do not use any other function except : pred, succ, ++, :, pattern matching, |
 --pattern match use only (x:xs)/(x:[]). do not use (x:y:xs)
 
--- null X, take, drop, fst X, snd X, map, filter, delete, deleteAll, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
---csort, scanl, scanl1, elem, notElem, head X, length X, reverse, last X, tail X, init X, max, min, concat, intersperse, intercalate,
+-- null X, take X, drop X, fst X, snd X, map, filter, delete, deleteAll, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
+--csort, scanl, scanl1, elem, notElem, head X, length X, reverse X, last X, tail X, init X, max, min, concat, intersperse, intercalate,
 -- and X, or X, zip3, sum X,
 --product, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, zipWith3
 
@@ -62,10 +62,16 @@ null' [] = True
 null'(x:xs) = False
 
 
---take' i [] = []
---take' i (x:xs)
-  -- | i <= 1 = [x]
-  -- | otherwise = (take' $ (i-1) (xs))
+take' i [] = []
+take' i (x:xs)
+  | i <= 1 = [x]
+  | otherwise = x:take' (i-1) xs
+
+drop' i [] = []
+drop' i (x:xs)
+  | i <= 0 = (x:xs)
+  | i == 1 = xs
+  | otherwise = drop' (i-1) xs
 
 fst' (x,x2) = x
 
@@ -107,5 +113,7 @@ or' (x:xs)
           | otherwise = or' xs
 
 length' [] = 0
-length' [x] = 1
 length' (x:xs) = 1+length' (xs)
+
+reverse' [] = []
+reverse' x = last' x:reverse' (init' x) -- everything i used here is predefined by me
