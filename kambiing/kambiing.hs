@@ -58,7 +58,9 @@ deleteAll' n (x:xs)
     | (n == x) = deleteAll' n xs
     | otherwise = x : deleteAll' n xs
 
-foldl' _ 0 [] = 0
-foldl' _ a [] = a
-foldl' f a (x:xs) = (f a) : foldl' f x xs
- 
+foldl'' _ a [] = a
+foldl'' f a (x:xs) = foldl'' f (f a x) xs
+
+
+foldl1'' _ (x:[]) = x
+foldl1'' f (x:y:xs) = foldl1'' f ((f x y):xs)
