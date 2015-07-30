@@ -47,3 +47,9 @@ filter' f (x:xs) =
   if (f x)
     then x : filter' f xs
     else filter' f xs
+
+delete' n [] = []
+delete' n (x:xs) =
+    if (n == x)
+      then delete' n xs
+      else x : delete' n xs
