@@ -42,7 +42,7 @@ max' x y
 
 
 maximum' [x] = x
-maximum' (x:xs) = max x (maximum' xs)
+maximum' (x:xs) = max' x (maximum' xs)
 
 min' x y
   | x <= y = x
@@ -53,7 +53,7 @@ minimum' (x:xs) = min' x (minimum' xs)
 
 repeat' x = x: repeat' x
 
-cycle' (x:xs) = (x:xs) ++ cycle' (x:xs)
+cycle' x = x ++ cycle' x
 
 buang a b
   | a == b = a:[]
@@ -70,3 +70,12 @@ interspersee x (y:ys) = [y,x] ++ (interspersee x ys)
 
 intersperse' _ (x:[]) = [x]
 intersperse' a (x:xs) = [x,a] ++ (intersperse' a xs)
+
+null' [] = True
+null' xs = False
+
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+
+nth' (x:xs) 0 = x
+nth' xs a = (nth' (drop 1 xs) (pred a))
