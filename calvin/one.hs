@@ -14,10 +14,26 @@ take' 0 _ = []
 take' n (x:xs) = x :take' (n-1) xs
 
 --drop
+drop' _ [] = []
+drop' 0 (x:xs) = (x:xs)
+drop' n (x:xs) = drop (n-1) xs
+
 --fst
+fst' (a,b) = a
+
 --snd
+snd' (a,b) = b
+
 --map
+map' f [] = []
+map' f (x:xs) = (f x) : (map' f xs)
+
 --filter
+filter' f [] = []
+filter' f (x:xs)
+|f x == True = x:(filter' xs)
+|f x == False = filter' xs
+
 --delete
 --deleteAll
 --foldl
