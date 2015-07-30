@@ -17,6 +17,8 @@ snd' (a, b) = b
 
 
 --map, filter, delete, nub, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
+
+
 --sort, scanl, scanl1, inits, tails
 
 elem' _ [] = False
@@ -29,21 +31,30 @@ notElem' n (x:xs)
     | x == n = False
     | otherwise = notElem' n xs
 
-head' (x:xs) = x
-
-length' [] = 0
-length' (x:xs) = 1 + length' xs
-
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
+
+head' (x:xs) = x
 
 last' [x] = x
 last' (x:xs) = last' xs
 
-tail' [] = []
-tail' (x:xs) = xs
+length' [] = 0
+length' (x:xs) = 1 + length' xs
 
---init
+init' [] = []
+init' (x:xs) = [x]
+
+tail' [] = []
+tail' [x] = [x]
+tail' (x:xs) = tail' xs
+
+--tails' [] = []
+--tails' (x:xs)
+--  | = tail' xs
+
+--init' [] = []
+--init' (x:xs) = [x]
 
 max' a b
   | a > b = a
@@ -53,11 +64,11 @@ min' a b
   | a < b = a
   | otherwise = b
 
-maximum' (x:y:xs)
-  | xs == [] = if x > y then x else y
-  | otherwise = if x > y then maximum' (x:xs) else (y:xs)
+--maximum' (x:y:xs)
+--  | xs == [] = if x > y then x else y
+--  | otherwise = if x > y then maximum' (x:xs) else (y:xs)
 
---max, min, minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
+--minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
 
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
@@ -65,5 +76,9 @@ sum' (x:xs) = x + sum' xs
 product' [] = 1
 product' (x:xs) = x * product' xs
 
---splitAt' 0 _ =
+--splitAt' 0 (x:xs) = (x, xs)
+--splitAt' n (x:xs)
+--  | xs == [] = x
+--  | otherwise = splitAt' (pred n) ([x] ++ [x]): [[xs]]
+
 --splitAt, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
