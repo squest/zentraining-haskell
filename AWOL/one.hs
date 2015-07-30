@@ -75,15 +75,10 @@ maximum' (x:y:xs)
   | xs == [] = if x > y then x else y
   | otherwise = maximum' (y:xs)
 
-maximum'' (x:xs)
-  | xs == [] = x
-  | otherwise = max' x (maximum'' xs)
-
 minimum' (x:y:xs)
     | xs == [] = if x < y then x else y
     | otherwise = minimum' (y:xs)
-
--- concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
+--minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
 
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
