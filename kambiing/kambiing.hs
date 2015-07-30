@@ -33,3 +33,7 @@ map' f (x:xs) = (f x) : map' f xs
 
 null' [] = True
 null' _ = False
+
+drop' 0 (x:xs) = (x:xs)
+drop' _ [] = []
+drop' n (x:xs) = x : drop' (n+1) xs
