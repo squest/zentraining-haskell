@@ -61,3 +61,4 @@ deleteAll' n (x:xs)
 foldl' _ 0 [] = 0
 foldl' _ a [] = a
 foldl' f a (x:xs) = (f a) : foldl' f x xs
+ 
