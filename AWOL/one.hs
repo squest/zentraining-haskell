@@ -16,7 +16,14 @@ fst' (a, b) = a
 snd' (a, b) = b
 
 
---map, filter, delete, nub, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
+--map, filter,
+
+delete' _ [] = []
+delete' n (x:xs)
+  | n == x = xs
+  | otherwise = x : (delete' n xs)
+
+-- nub, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
 
 
 --sort, scanl, scanl1, inits, tails
@@ -64,10 +71,13 @@ min' a b
   | a < b = a
   | otherwise = b
 
---maximum' (x:y:xs)
---  | xs == [] = if x > y then x else y
---  | otherwise = if x > y then maximum' (x:xs) else (y:xs)
+maximum' (x:y:xs)
+  | xs == [] = if x > y then x else y
+  | otherwise = maximum' (y:xs)
 
+minimum' (x:y:xs)
+    | xs == [] = if x < y then x else y
+    | otherwise = minimum' (y:xs)
 --minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
 
 sum' [] = 0
@@ -76,9 +86,14 @@ sum' (x:xs) = x + sum' xs
 product' [] = 1
 product' (x:xs) = x * product' xs
 
---splitAt' 0 (x:xs) = (x, xs)
+--splitAt' 0 (x:xs) = (x:xs)
 --splitAt' n (x:xs)
 --  | xs == [] = x
---  | otherwise = splitAt' (pred n) ([x] ++ [x]): [[xs]]
+--  | otherwise = 1
 
---splitAt, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
+--splitAt,
+
+--words' "x"
+--  | x == " " = []
+--  | otherwise = ["x"]
+-- words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
