@@ -16,7 +16,7 @@ fst' (a, b) = a
 snd' (a, b) = b
 
 map' _ [] = []
-map' f (x:xs) = [(f x)] ++ [(map' xs)]
+map' f (x:xs) = [(f x)] ++ [(map' f xs)]
 
 --map, filter,
 
