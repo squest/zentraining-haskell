@@ -8,6 +8,8 @@ module WorkSheet where
 
 --special (!!) => ganti jadi elke, (++) => ganti jadi cats,
 
+import Data.List
+
 null' [] = True
 null' _ = False
 
@@ -42,6 +44,11 @@ tail' (x:xs) = (xs)
 init' [x] = []
 init' (x:xs) = x : init' xs
 init' [] = error "won't work, yo mama so fat!!"
+
+--and' [] = True
+--and' (x:xs)
+  -- | x == False = False
+  -- | otherwise = True && and' xs
 
 last' [x] = x
 last' (x:xs) = last' xs
@@ -101,16 +108,13 @@ intercalate' (a) (x:xs) = (x ++ a) ++ intercalate' a xs
 group' [a] = [[a]]
 group' (x:xs) = [x] : group' xs
 
-zip' [] [_] = []
-zip' (x:xs) [y] = [(x,y)]
-zip' [x] (y:ys) = [(x,y)]
+zip' [] _ = []
+zip' _ [] = []
 zip' (x:xs) (y:ys) = (x,y) : zip' (xs) (ys)
 
-zip3' [] [_] [_] = []
-zip3' (x:xs) [y] [z] = [(x,y,z)]
-zip3' (x:xs) (y:ys) [z] = [(x,y,z)]
-zip3' (x:xs) [y] (z:zs) = [(x,y,z)]
-zip3' [x] (y:ys)(z:zs) = [(x,y,z)]
+zip3' [] _ _ = []
+zip3' _ [] _ = []
+zip3' _ _ [] = []
 zip3' (x:xs) (y:ys) (z:zs) = (x,y,z) : zip3' (xs)(ys)(zs)
 
 --sort' [] = []
@@ -124,25 +128,32 @@ zip3' (x:xs) (y:ys) (z:zs) = (x,y,z) : zip3' (xs)(ys)(zs)
   --  | x == y = x:(nub' xs)
   --  | x /=y = x:y:(nub' xs)
 
+deleteAll' _ [] = []
+deleteAll' a (x:xs)
+  | a == x = deleteAll' x xs
+  | a /= x = x : (deleteAll' a xs)
+
 delete' _ [] = []
 delete' a (x:xs)
-  | a == x = delete' x xs
+  | a == x = xs
   | a /= x = x : (delete' a xs)
 
+foldl' 
+
 sum' [] = 0
-sum' [a] = a
 sum' (x:xs) = x + (sum' xs)
 
 product' [] = 1
-product' [a] = a
 product' (x:xs) = x * (product' xs)
 
 --splitAt' _ [] = ([],[])
 --splitAt' 0 [x] = ([],[x])
 --splitAt a (x:xs) = ([x]++(splitAt' (a-1) xs))
 
-words' "" = []
-words' a = [a]
+--words' "" = []
+--words' a = [a]
+
+
 
 
 -- nub [1,1,3,4,4,2]
