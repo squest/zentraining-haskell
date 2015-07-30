@@ -45,10 +45,15 @@ init' [x] = []
 init' (x:xs) = x : init' xs
 init' [] = error "won't work, yo mama so fat!!"
 
---and' [] = True
---and' (x:xs)
-  -- | x == False = False
-  -- | otherwise = True && and' xs
+and' [] = True
+and' (x:xs)
+   | x == False = False
+   | otherwise = and' xs
+
+or' [] = False
+or' (x:xs)
+   | x == False = or' xs
+   | otherwise = True
 
 last' [x] = x
 last' (x:xs) = last' xs
@@ -138,7 +143,9 @@ delete' a (x:xs)
   | a == x = xs
   | a /= x = x : (delete' a xs)
 
-foldl' 
+foldl' f 0 _ = 0
+foldl' f a [] = a
+foldl' f a (x:xs) = f a (x:xs)
 
 sum' [] = 0
 sum' (x:xs) = x + (sum' xs)
