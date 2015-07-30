@@ -26,15 +26,15 @@ fak x
 fak2 0 = 1
 fak2 i = i * (fak2 $ pred i)
 
--- isPrime x
-  -- | x < 2 = False
-  -- | x == 2 = True
-  -- | even x = False
-  -- | otherwise = iter 3
-  -- where iter i
-    -- | (i*i) > x = True
-    -- | 0 == rem x i = False
-    -- | otherwise = iter $ i + 2
+isPrime x
+  | x < 2 = False
+  | x == 2 = True
+  | even x = False
+  | otherwise = iter 3
+  where iter i
+          | (i*i) > x = True
+          | 0 == rem x i = False
+          | otherwise = iter $ i + 2
 
 -- fakIter i = iter 1 1
   -- where iter n res
@@ -83,16 +83,28 @@ tail' [x] = []
 tail' (x:xs) = xs
 
 init' [x] = []
-init' [x,x2] = [x]
 init' (x:xs) = x:init' xs
 
 and' [] = True
 and' [x] = x
-and' (x:xs) = x && (and' xs)
+--and' (x:xs) = x && (and' xs)
+and' (x:xs)
+  | x == True = test x
+  | x == False = test x
+  where test x
+          | x == and' xs = x
+          | otherwise = False
+
 
 or' [] = False
 or' [x] = x
-or' (x:xs) = x || (and' xs)
+--or' (x:xs) = x || (and' xs)
+or' (x:xs)
+  | x == True = True
+  | x == False = test x
+  where test x
+          | head' xs == True = True
+          | otherwise = or' xs
 
 length' [] = 0
 length' [x] = 1
