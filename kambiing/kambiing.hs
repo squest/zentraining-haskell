@@ -21,7 +21,7 @@ fakIter i = iter 1 1
           | n > i = res
           | otherwise = iter (n+1) (res*n)
 
-take' 0 = []
+take' 0 _ = []
 take' _ [] = []
 take' n (x:xs) = x : take' (n-1) xs
 
@@ -30,3 +30,6 @@ sum (x:xs) = x + (sum' xs)
 
 map' f [] = []
 map' f (x:xs) = (f x) : map' f xs
+
+null' [] = True
+null' _ = False
