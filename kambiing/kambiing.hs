@@ -53,8 +53,11 @@ delete' n (x:xs)
   | (n == x) = xs
   | otherwise = x : delete' n xs
 
-
 deleteAll' n [] = []
 deleteAll' n (x:xs)
     | (n == x) = deleteAll' n xs
     | otherwise = x : deleteAll' n xs
+
+foldl' _ 0 [] = 0
+foldl' _ a [] = a
+foldl' f a (x:xs) = (f a) : foldl' f x xs
