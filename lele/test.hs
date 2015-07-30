@@ -77,8 +77,16 @@ null' xs = False
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
 
+product' [] = 1
+product' (x:xs) = x * product' xs
+
 nth' (x:xs) 0 = x
 nth' xs a = (nth' (drop' 1 xs) (pred a))
 
 map' f [] = []
 map' f (x:xs) = [f x] ++ (map' f xs)
+
+filter' f [] = []
+filter' f (x:xs)
+  | f x = x: (filter' f xs)
+  | otherwise = (filter' f xs)

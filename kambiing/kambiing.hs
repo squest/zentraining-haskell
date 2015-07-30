@@ -26,7 +26,7 @@ take' _ [] = []
 take' n (x:xs) = x : take' (n-1) xs
 
 sum' [] = 0
-sum (x:xs) = x + (sum' xs)
+sum' (x:xs) = x + (sum' xs)
 
 map' f [] = []
 map' f (x:xs) = (f x) : map' f xs
@@ -43,4 +43,13 @@ fst' (a, b) = a
 snd' (a, b) = b
 
 filter' f [] = []
-filter' f (x:xs) = (f x) : filter' f xs
+filter' f (x:xs) =
+  if (f x)
+    then x : filter' f xs
+    else filter' f xs
+
+delete' n [] = []
+delete' n (x:xs) =
+    if (n == x)
+      then delete' n xs
+      else x : delete' n xs
