@@ -34,8 +34,8 @@ head' (x:xs) = x
 length' [] = 0
 length' (x:xs) = 1 + length' xs
 
---reverse' [] = []
---reverse' (x:xs) = reverse' xs (: x)
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
 
 last' [x] = x
 last' (x:xs) = last' xs
@@ -43,5 +43,27 @@ last' (x:xs) = last' xs
 tail' [] = []
 tail' (x:xs) = xs
 
+--init
 
---init, max, min, minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3, sum, product, splitAt, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
+max' a b
+  | a > b = a
+  | otherwise = b
+
+min' a b
+  | a < b = a
+  | otherwise = b
+
+maximum' (x:y:xs)
+  | xs == [] = if x > y then x else y
+  | otherwise = if x > y then maximum' (x:xs) else (y:xs)
+
+--max, min, minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
+
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+
+product' [] = 1
+product' (x:xs) = x * product' xs
+
+--splitAt' 0 _ =
+--splitAt, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
