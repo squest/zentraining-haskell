@@ -52,8 +52,8 @@ fak2 i = i * (fak2 $ pred i)
 --pattern match use only (x:xs)/(x:[]). do not use (x:y:xs)
 
 -- null X, take, drop, fst X, snd X, map, filter, delete, deleteAll, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
---csort, scanl, scanl1, elem, notElem, head X, length, reverse, last X, tail X, init X, max, min, concat, intersperse, intercalate,
--- and, or, zip3, sum X,
+--csort, scanl, scanl1, elem, notElem, head X, length X, reverse, last X, tail X, init X, max, min, concat, intersperse, intercalate,
+-- and X, or X, zip3, sum X,
 --product, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, zipWith3
 
 testcase = [1,2,3,4]
@@ -88,3 +88,12 @@ init' (x:xs) = x:init' xs
 
 and' [] = True
 and' [x] = x
+and' (x:xs) = x && (and' xs)
+
+or' [] = False
+or' [x] = x
+or' (x:xs) = x || (and' xs)
+
+length' [] = 0
+length' [x] = 1
+length' (x:xs) = 1+length' (xs)
