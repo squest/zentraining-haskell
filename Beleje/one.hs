@@ -42,7 +42,7 @@ belDelete a (x:xs)
   | a == x = xs
   | otherwise = x:(belDelete a xs)
 
--- DELETE ALL KW
+-- DELETEALL KW
 belDeleteAll a [] = []
 belDeleteAll a (x:xs)
   | a == x = (belDeleteAll a xs)
@@ -57,3 +57,18 @@ belFoldl1 f (x:[]) = x
 belFoldl1 f (x:xs) = (belFoldl f x xs)
 
 -- ZIP KW
+belZip [] [] = []
+belZip (x:xs) [] = []
+belZip [] (y:ys) = []
+belZip (x:xs) (y:ys) = [(x, y)] ++ (belZip xs ys)
+
+-- ZIPWITH KW
+belZipWith f [] [] = []
+belZipWith f (x:xs) [] = []
+belZipWith f [] (y:ys) = []
+belZipWith f (x:xs) (y:ys) = [((f x y))] ++ (belZipWith f xs ys)
+
+-- !! KW
+nth (x:xs) i
+  | i == 0 = x
+  | otherwise = nth xs (pred i)
