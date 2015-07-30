@@ -57,15 +57,13 @@ belFoldl1 f (x:[]) = x
 belFoldl1 f (x:xs) = (belFoldl f x xs)
 
 -- ZIP KW
-belZip [] [] = []
-belZip (x:xs) [] = []
-belZip [] (y:ys) = []
+belZip _ [] = []
+belZip [] _ = []
 belZip (x:xs) (y:ys) = [(x, y)] ++ (belZip xs ys)
 
 -- ZIPWITH KW
-belZipWith f [] [] = []
-belZipWith f (x:xs) [] = []
-belZipWith f [] (y:ys) = []
+belZipWith f _ [] = []
+belZipWith f [] _ = []
 belZipWith f (x:xs) (y:ys) = [((f x y))] ++ (belZipWith f xs ys)
 
 -- !! KW
