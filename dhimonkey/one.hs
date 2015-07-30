@@ -55,6 +55,8 @@ or' (x:xs)
    | x == False = or' xs
    | otherwise = True
 
+
+
 last' [x] = x
 last' (x:xs) = last' xs
 last' [] = error "won't work, yo mama so fat!"
@@ -94,6 +96,8 @@ tails' (x:xs) = (x:xs) : (tails' xs)
 
 inits' [] = [[]]
 inits' (x:xs) = inits' [x] ++ (inits' xs)
+
+
 
 --union' [] [] = []
 --intersect'
@@ -143,9 +147,11 @@ delete' a (x:xs)
   | a == x = xs
   | a /= x = x : (delete' a xs)
 
-foldl' f 0 _ = 0
-foldl' f a [] = a
-foldl' f a (x:xs) = f a (x:xs)
+--foldl' f 0 _ = 0
+--foldl' f a [] = a
+--foldl' f a (x:xs) = f a (x:xs)
+
+insert' a (x:xs) = a:(x:xs)
 
 sum' [] = 0
 sum' (x:xs) = x + (sum' xs)
@@ -157,8 +163,8 @@ product' (x:xs) = x * (product' xs)
 --splitAt' 0 [x] = ([],[x])
 --splitAt a (x:xs) = ([x]++(splitAt' (a-1) xs))
 
---words' "" = []
---words' a = [a]
+words' "" = []
+words' a = [a]
 
 
 
