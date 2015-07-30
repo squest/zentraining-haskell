@@ -11,9 +11,9 @@ drop' _ [] = []
 drop' 0 (x:xs) = x:xs
 drop' n (x:xs) = drop' (pred n) xs
 
-fst' (x:xs) = x
+fst' (a, b) = a
 
-snd' (x:a:xs) = a
+snd' (a, b) = b
 
 
 --map, filter, delete, nub, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
