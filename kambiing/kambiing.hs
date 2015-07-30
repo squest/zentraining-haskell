@@ -42,14 +42,19 @@ fst' (a, b) = a
 
 snd' (a, b) = b
 
+
 filter' f [] = []
-filter' f (x:xs) =
-  if (f x)
-    then x : filter' f xs
-    else filter' f xs
+filter' f (x:xs)
+  | (f x) = x : filter' f xs
+  | otherwise = filter' f xs
 
 delete' n [] = []
-delete' n (x:xs) =
-    if (n == x)
-      then delete' n xs
-      else x : delete' n xs
+delete' n (x:xs)
+  | (n == x) = xs
+  | otherwise = x : delete' n xs
+
+
+deleteAll' n [] = []
+deleteAll' n (x:xs)
+    | (n == x) = deleteAll' n xs
+    | otherwise = x : deleteAll' n xs
