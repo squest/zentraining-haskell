@@ -48,3 +48,13 @@ fakIter i = iter 1 1
   where iter n res
           | n > i = res
           | otherwise = iter (n+1) (res*n)
+
+take' 0 = []
+take' _ [] = []
+take' n (x:xs) = x : take' (n-1) xs
+
+sum' [] = 0
+sum (x:xs) = x + (sum' xs)
+
+map' f [] = []
+map' f (x:xs) = (f x) : map' f xs
