@@ -63,7 +63,7 @@ fst' (x, y) = x
 
 snd' (x, y) = y
 
-droplast' xs = reverse $ tail $ reverse xs
+droplast' xs = reverse' $ tail' $ reverse' xs
 
 interspersee x [y] = [y,x]
 interspersee x (y:ys) = [y,x] ++ (interspersee x ys)
@@ -78,4 +78,7 @@ sum' [] = 0
 sum' (x:xs) = x + sum' xs
 
 nth' (x:xs) 0 = x
-nth' xs a = (nth' (drop 1 xs) (pred a))
+nth' xs a = (nth' (drop' 1 xs) (pred a))
+
+map' f [] = []
+map' f (x:xs) = [f x] ++ (map' f xs)
