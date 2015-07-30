@@ -15,7 +15,6 @@ fst' (a, b) = a
 
 snd' (a, b) = b
 
-
 --map, filter,
 
 delete' _ [] = []
@@ -75,10 +74,15 @@ maximum' (x:y:xs)
   | xs == [] = if x > y then x else y
   | otherwise = maximum' (y:xs)
 
+maximum'' (x:xs)
+  | xs == [] = x
+  | otherwise = max' x (maximum'' xs)
+
 minimum' (x:y:xs)
     | xs == [] = if x < y then x else y
     | otherwise = minimum' (y:xs)
---minimum, maximum, concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
+
+-- concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
 
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
@@ -91,9 +95,8 @@ product' (x:xs) = x * product' xs
 --  | xs == [] = x
 --  | otherwise = 1
 
---splitAt,
-
 --words' "x"
 --  | x == " " = []
 --  | otherwise = ["x"]
+
 -- words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
