@@ -113,3 +113,35 @@ belReverse (x:xs) = (belReverse xs) ++ [x]
 belLast (x:xs)
   | xs == [] = x
   | otherwise = belLast xs
+
+-- TAIL KW
+belTail (x:xs) = xs
+
+-- INIT KW
+belInit (x:xs)
+  | xs == [] = []
+  | otherwise = x:(belInit xs)
+
+-- MAX KW
+belMax a b
+  | a > b = a
+  | otherwise = b
+
+-- MIN KW
+belMin a b
+  | a < b = a
+  | otherwise = b
+
+-- CONCAT KW
+belConcat [] = []
+belConcat (x:xs)
+  | xs == [] = x
+  | otherwise = x ++ (belConcat xs)
+
+-- INTERSPERSE KW
+belIntersperse a [] = []
+belIntersperse a (x:xs)
+  | xs == [] = [x]
+  | otherwise = x:a:(belIntersperse a xs)
+
+-- INTERCALATE KW
