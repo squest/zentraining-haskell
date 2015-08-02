@@ -3,6 +3,7 @@ import Data.List
 
 square x = x*x
 tiger = "knee"
+-- 1a
 
 --null'
 null' [] = True
@@ -68,18 +69,12 @@ zipWith' f (x1:xs1) (x2:xs2) = (f x1 x2):zipWith' f xs1 xs2
 nth' (x:xs) 0 = x
 nth' (x:xs) n = nth' xs (n-1)
 
---sort BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-sort' [] = []
--- sort' (x:xs) = 
-
 --scanl
 scan' f n [] = [n]
 scan' f n (x:xs) = n:scan' f (f n x) xs
 
---scanl1 DITANGGUHKANNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-scan1' f [] = []
-scan1' f [x] = [x]
-scan1' f (x:xs) = f x (scan1' f xs):scan1' f xs
+--scanl1
+scan1' f (x:xs) = scan' f x xs
 
 --elem
 elem' n [] = False
@@ -213,3 +208,35 @@ zipWith3' _ [] _ _ = []
 zipWith3' _ _ [] _ = []
 zipWith3' _ _ _ [] = []
 zipWith3' f (x1:x1s) (x2:x2s) (x3:x3s) = (f x1 x2 x3):zipWith3' f x1s x2s x3s
+
+-- 1b
+
+-- nub
+-- sort
+-- minimum
+minimum' [x] = x
+minimum' (x:xs) = min' x (minimum' xs)
+
+-- maximum
+maximum' [x] = x
+maximum' (x:xs) = max' x (maximum' xs)
+
+-- inits
+inits' [] = [[]]
+inits' (x) = (inits' (init' x)) ++ [x] 
+
+-- tails
+tails' [] = [[]]
+tails' (x) = x:tails' (tail' x)
+
+-- union
+-- intersect
+-- group
+-- splitAt
+splitAt' n (x) = (take n x):(drop n x):[]
+
+-- partition
+-- replicate
+replicate' 0 _ = []
+replicate' n (x) = x:replicate' (n-1) x
+
