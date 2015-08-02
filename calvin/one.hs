@@ -3,7 +3,7 @@ import Data.List
 
 square x = x*x
 tiger = "knee"
--- 1a
+-- 1A. REIMPLEMENT TODDLER STUFFS 
 
 --null'
 null' [] = True
@@ -209,7 +209,7 @@ zipWith3' _ _ [] _ = []
 zipWith3' _ _ _ [] = []
 zipWith3' f (x1:x1s) (x2:x2s) (x3:x3s) = (f x1 x2 x3):zipWith3' f x1s x2s x3s
 
--- 1b
+-- 1B. REIMPLEMENT A BIT GROWN TODDLER STUFFS
 
 -- nub
 -- sort
@@ -233,10 +233,34 @@ tails' (x) = x:tails' (tail' x)
 -- intersect
 -- group
 -- splitAt
-splitAt' n (x) = (take n x):(drop n x):[]
+splitAt' n (x) = (take' n x):(drop' n x):[]
 
 -- partition
 -- replicate
 replicate' 0 _ = []
 replicate' n (x) = x:replicate' (n-1) x
 
+-- 2. LAZIES
+
+-- iterate
+iterate' f n = n:iterate' f (f n)
+
+-- repeat
+repeat' n = n:repeat' n
+
+-- cycle
+cycle' x = x++cycle' x
+
+-- 3. CRYSTAL METH STUFFS
+
+-- isPrime
+-- primesUnder
+-- fibo
+-- fiboList
+-- pascal
+-- pascalAll
+-- fak
+fak' 0 = 1
+fak' n = n * fak' (n-1)
+
+-- fakList
