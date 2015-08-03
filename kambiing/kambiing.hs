@@ -25,8 +25,8 @@ take' 0 _ = []
 take' _ [] = []
 take' n (x:xs) = x : take' (n-1) xs
 
-sum' [] = 0
-sum' (x:xs) = x + (sum' xs)
+--sum' [] = 0
+--sum' (x:xs) = x + (sum' xs)
 
 map' f [] = []
 map' f (x:xs) = (f x) : map' f xs
@@ -133,3 +133,24 @@ concat' (x:xs) = x ++ (concat' xs)
 intersperse' _ [] = []
 intersperse' _ (x:[]) = x : []
 intersperse' a (x:xs) = x : a : intersperse' a xs
+
+intercalate' _ [] = []
+intercalate' _ (x:[]) = x ++ []
+intercalate' a (x:xs) = x ++ a ++ intercalate' a xs
+
+and' [] = True
+and' (x:y:xs) = if x && y then True else False
+
+or' [] = False
+or' (x:y:xs) = if x && y then True else False
+
+zip3' [] _ _ = []
+zip3' _ [] _ = []
+zip3' _ _ [] = []
+zip3' (a:as) (x:xs) (y:ys) = (a,x,y) : zip3' as xs ys
+
+sum' (x:[]) = x
+sum' (x:y:xs) = sum' ((x + y):xs)
+
+product' (x:[]) = x
+product' (x:y:xs) = product' ((x * y):xs)
