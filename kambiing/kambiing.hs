@@ -92,3 +92,20 @@ elem' a [] = False
 elem' a (x:xs)
       | (x == a) = True
       | otherwise = elem' a xs
+
+notElem' a [] = True
+notElem' a (x:xs)
+      | (x == a) = False
+      | otherwise = notElem' a xs
+
+head' (x:xs) = x
+
+tail' (x:xs) = xs
+
+length' [] = 0
+length' (x:xs) = 1 + (length' xs)
+
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+
+last' (x:xs) = (head' (reverse' xs)) 
