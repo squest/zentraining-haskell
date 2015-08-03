@@ -68,3 +68,7 @@ foldl1'' f (x:y:xs) = foldl1'' f ((f x y):xs)
 zip' [] _ = []
 zip' _ [] = []
 zip' (a:as) (x:xs) = (a,x) : zip' as xs
+
+zipWith' _ [] _ = []
+zipWith' _ _ [] = []
+zipWith' f (a:as) (x:xs) = (f a x) : zipWith' f as xs
