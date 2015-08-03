@@ -139,10 +139,14 @@ intercalate' _ (x:[]) = x ++ []
 intercalate' a (x:xs) = x ++ a ++ intercalate' a xs
 
 and' [] = True
-and' (x:y:xs) = if x && y then True else False
+and' (x:xs)
+  | x = and' xs
+  | otherwise = False
 
 or' [] = False
-or' (x:y:xs) = if x && y then True else False
+or' (x:xs)
+  | x =True
+  | otherwise = or' xs
 
 zip3' [] _ _ = []
 zip3' _ [] _ = []
@@ -154,3 +158,18 @@ sum' (x:y:xs) = sum' ((x + y):xs)
 
 product' (x:[]) = x
 product' (x:y:xs) = product' ((x * y):xs)
+
+unwords' (x:[]) = x
+unwords' (x:xs) = x ++ " " ++ unwords' xs
+
+takeWhile' f [] = []
+takeWhile' f (x:xs)
+  | (f x) = x : takeWhile' f xs
+  | otherwise = []
+
+concatMap' _ [] = []
+concatMap' f (x:xs) = (f x) ++ concatMap' f xs
+
+all' f (x) = and' (map' f x)
+
+any' f (x) = or' (map' f x)
