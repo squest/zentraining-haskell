@@ -72,3 +72,12 @@ zip' (a:as) (x:xs) = (a,x) : zip' as xs
 zipWith' _ [] _ = []
 zipWith' _ _ [] = []
 zipWith' f (a:as) (x:xs) = (f a x) : zipWith' f as xs
+
+nth [] _ = []
+nth (xs) n = [xs !! n]
+
+sort' [] = []
+sort' (x:[]) = [x]
+sort' (x:xs) = (sort' (filter (<= x) xs)) ++
+                [x] ++
+                (sort' (filter (> x) xs))
