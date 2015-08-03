@@ -153,6 +153,11 @@ zip3' _ [] _ = []
 zip3' _ _ [] = []
 zip3' (a:as) (x:xs) (y:ys) = (a,x,y) : zip3' as xs ys
 
+zipWith3' _ [] _ _ = []
+zipWith3' _ _ [] _ = []
+zipWith3' _ _ _ [] = []
+zipWith3' f (a:as) (x:xs) (y:ys) = (f a x y) : zipWith3' f as xs ys
+
 sum' (x:[]) = x
 sum' (x:y:xs) = sum' ((x + y):xs)
 
@@ -173,3 +178,5 @@ concatMap' f (x:xs) = (f x) ++ concatMap' f xs
 all' f (x) = and' (map' f x)
 
 any' f (x) = or' (map' f x)
+
+insert' x (xs) = x:xs
