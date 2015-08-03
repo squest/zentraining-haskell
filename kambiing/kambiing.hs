@@ -108,4 +108,28 @@ length' (x:xs) = 1 + (length' xs)
 reverse' [] = []
 reverse' (x:xs) = reverse' xs ++ [x]
 
-last' (x:xs) = (head' (reverse' xs)) 
+last' (x:xs) = (head' (reverse' xs))
+
+init'' (xs) = (reverse' (tail' (reverse' xs)))
+
+init' (x:[]) = []
+init' (x:xs) = x : init' xs
+
+min'' (xs) = (head' (sort' xs))
+max'' (xs) = (head' (reverse (sort' xs)))
+
+max' a b = if a > b then a else b
+min' a b = if a > b then b else a
+
+maximum' [x] = x
+maximum' (x:xs) = max' x (maximum' xs)
+
+minimum' [x] = x
+minimum' (x:xs) = min' x (minimum' xs)
+
+concat' [] = []
+concat' (x:xs) = x ++ (concat' xs)
+
+intersperse' _ [] = []
+intersperse' _ (x:[]) = x : []
+intersperse' a (x:xs) = x : a : intersperse' a xs
