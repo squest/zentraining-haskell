@@ -5,6 +5,7 @@ import Data.List
 -- NGETES JALAN
 squa x = x*x
 
+---------------------------- 1.A Pup ----------------------------
 -- NULL KW
 belNull [] = True
 belNull (x:xs) = False
@@ -175,3 +176,151 @@ belSum (x:xs) = belFoldl1 (+) (x:xs)
 -- PRODUCT KW
 belProduct [] = 1
 belProduct (x:xs) = belFoldl1 (*) (x:xs)
+
+-- WORDS KW
+belWords [] = []
+belWords (x:xs) = round 0 (x:xs)
+  where round i l
+          | belNotElem ' ' l = [l]
+          | nth l i == ' ' = [belTake i l] ++ (round 0 (belDrop (succ i) l))
+          | otherwise = round (succ i) l
+
+-- LINES KW
+belLines "" = []
+belLines a = [a]
+
+-- UNLINES KW
+belUnlines [] = ""
+belUnlines (x:xs)
+  | x == [] = []
+  | otherwise = x ++ "\n" ++ belUnlines xs
+
+-- UNWORDS KW
+belUnwords [] = ""
+belUnwords l = (intercalate [' '] l)
+
+-- TAKEWHILE KW
+belTakeWhile f [] = []
+belTakeWhile f (x:xs)
+  | (f x) = x:(belTakeWhile f xs)
+  | otherwise = []
+
+-- DROPWHILE KW
+belDropWhile f [] = []
+belDropWhile f (x:xs)
+  | (f x) = (belDropWhile f xs)
+  | otherwise = (x:xs)
+
+-- CONCATMAP KW
+belConcatMap f [] = []
+belConcatMap f (x:xs) = f x ++ (belConcatMap f xs)
+
+-- ALL KW
+belAll f [] = True
+belAll f l = (and (map f l))
+
+-- ANY KW
+belAny f [] = False
+belAny f l = (or (map f l))
+
+-- INSERT KW
+belInsert2 a (x:xs) = belSort a:(x:xs)
+
+-- ZIPWITH3
+belZipWith3 f _ _ [] = []
+belZipWith3 f _ [] _ = []
+belZipWith3 f [] _ _ = []
+belZipWith3 f (x:xs) (y:ys) (z:zs) = [f (f x y) z] ++ (belZipWith3 f xs ys zs)
+
+---------------------------- 1.B Puppy ----------------------------
+-- NUB KW
+belNub [] = []
+belNub (x:xs)
+  | belElem x xs = x:belNub(belDeleteAll x xs)
+  | otherwise = x:belNub xs
+
+-- MINIMUM KW
+belMinimum (x:[]) = x
+belMinimum (x:xs) = (min x (belMinimum xs))
+
+-- MAXIMUM KW
+belMaximum (x:[]) = x
+belMaximum (x:xs) = (max x (belMaximum xs))
+
+-- INITS KW
+belInits [] = [[]]
+belInits (x:xs) = (belInits (belInit (x:xs))) ++ [(x:xs)]
+
+-- TAILS KW
+belTails [] = [[]]
+belTails (x:xs) = [(x:xs)] ++ (belTails (belTail (x:xs)))
+
+-- UNION KW
+belUnion l [] = l
+belUnion [] l = l
+belUnion l (x:xs)
+  | belElem x l = belUnion l xs
+  | otherwise = belUnion (l ++ [x]) xs
+
+-- INTERSECT KW
+belIntersect l [] = []
+belIntersect [] l = []
+belIntersect (x:xs) (y:ys)
+  | belElem x (y:ys) = x:belIntersect xs (y:ys)
+  | otherwise = belIntersect xs (y:ys)
+
+-- GROUP KW
+belGroup [] = []
+belGroup (x:xs) = [x]:(belGroup xs)
+
+-- SPLITAT KW
+belSplitAt n [] = (belTake n [], belDrop n [])
+belSplitAt n (x:xs) = (belTake n (x:xs), belDrop n (x:xs))
+
+-- PARTITION KW
+belPartition f [] = ([],[])
+belPartition f l = (filter f l, filter (\n -> not (f n)) l)
+
+-- REPLICATE KW
+belReplicate 0 _ = []
+belReplicate n l = [l] ++ belReplicate (pred n) l
+
+-- SUBSEQUENCES KW
+
+-- PERMUTATIONS KW
+
+---------------------------- 2 Pubs ----------------------------
+-- ITERATE KW
+belIterate f n = n:(belIterate f (f n))
+
+-- REPEAT KW
+belRepeat n = n:(belRepeat n)
+
+-- CYCLE KW
+belCycle l = l ++ belCycle l
+---------------------------- 3 Pops ----------------------------
+-- FACTORIAL
+belFact 0 = 1
+belFact n = n * (belFact (pred n))
+
+-- FACTORIAL LIST
+belFactL 0 = [1]
+belFactL n = n:(belFactL (pred n))
+
+-- FIBBO
+belFib 1 = 1
+belFib 2 = 1
+belFib n = belFib (n - 2) + belFib (n - 1)
+
+-- FIBBO LIST
+belFibL n = map belFib [1..n]
+
+-- PASCAL
+belPascal 1 = [1]
+belPascal n = zipWith (+) (0:(belPascal (pred n))) (belPascal (pred n) ++ [0])
+
+-- PASCAL LIST
+belPascalL n = map belPascal [1..n]
+
+-- PRIME
+-- PRIME BELOW
