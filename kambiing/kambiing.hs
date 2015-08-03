@@ -81,3 +81,14 @@ sort' (x:[]) = [x]
 sort' (x:xs) = (sort' (filter (<= x) xs)) ++
                 [x] ++
                 (sort' (filter (> x) xs))
+
+scanl' f a [] = [a]
+scanl' f a (x:xs) = a : scanl' f (f a x) xs
+
+scanl1' _ (x:[]) = [x]
+scanl1' f (x:y:xs) = x : scanl1' f ((f x y):xs)
+
+elem' a [] = False
+elem' a (x:xs)
+      | (x == a) = True
+      | otherwise = elem' a xs
