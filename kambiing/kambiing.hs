@@ -180,3 +180,6 @@ all' f (x) = and' (map' f x)
 any' f (x) = or' (map' f x)
 
 insert' x (xs) = x:xs
+
+nub' [] = []
+nub' (x:xs) = x : (nub' (deleteAll' x xs))
