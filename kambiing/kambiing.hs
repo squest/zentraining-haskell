@@ -204,3 +204,16 @@ group' xs = takeWhile' (== head' xs) xs : group' (dropWhile (== head' xs) xs)
 
 splitAt' _ [] = []
 splitAt' n xs = [take n xs] ++ [drop n xs]
+
+partition' _ [] = []
+partition' f xs = [filter' f xs] ++ [filter' (\n -> not (f n)) xs]
+
+replicate' 0 [] = []
+replicate' n xs = take' n ([xs] ++ replicate' (pred n) xs)
+
+
+iterate' f x = x : iterate' f (f x)
+
+repeat' x = x : repeat' x
+
+cycle' x = x ++ cycle' x
