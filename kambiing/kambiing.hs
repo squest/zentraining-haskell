@@ -183,3 +183,16 @@ insert' x (xs) = x:xs
 
 nub' [] = []
 nub' (x:xs) = x : (nub' (deleteAll' x xs))
+
+union' [] [] = []
+union' xs ys = nub' (xs ++ ys)
+
+tails' [] = [[]]
+tails' (x:xs) = (x:xs) : tails' xs
+
+inits' [] = [[]]
+inits' xs = (map' reverse' (reverse' (tails' (reverse' xs))))
+
+intersect' [] = []
+intersect' (x:xs)
+        |
