@@ -217,3 +217,9 @@ iterate' f x = x : iterate' f (f x)
 repeat' x = x : repeat' x
 
 cycle' x = x ++ cycle' x
+
+--(fn [x] (nth (iterate #(conj % (+ (last(butlast %)) (last %) )) [1 1] ) (- x 2) ))
+--translate dari clojure, masih salah
+fibopartial xs = xs ++ [((last (init xs)) + last' xs)]
+fibo 2 = [1,1]
+fibo x = nth (iterate' fibopartial [1,1]) (x - 2)
