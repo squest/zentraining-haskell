@@ -197,7 +197,7 @@ belUnlines (x:xs)
 
 -- UNWORDS KW
 belUnwords [] = ""
-belUnwords l = (intercalate [' '] l)
+belUnwords l = (belIntercalate [' '] l)
 
 -- TAKEWHILE KW
 belTakeWhile f [] = []
@@ -217,11 +217,11 @@ belConcatMap f (x:xs) = f x ++ (belConcatMap f xs)
 
 -- ALL KW
 belAll f [] = True
-belAll f l = (and (map f l))
+belAll f l = (belAnd (belMap f l))
 
 -- ANY KW
 belAny f [] = False
-belAny f l = (or (map f l))
+belAny f l = (belOr (belMap f l))
 
 -- INSERT KW
 belInsert2 a (x:xs) = belSort a:(x:xs)
@@ -241,11 +241,11 @@ belNub (x:xs)
 
 -- MINIMUM KW
 belMinimum (x:[]) = x
-belMinimum (x:xs) = (min x (belMinimum xs))
+belMinimum (x:xs) = (belMin x (belMinimum xs))
 
 -- MAXIMUM KW
 belMaximum (x:[]) = x
-belMaximum (x:xs) = (max x (belMaximum xs))
+belMaximum (x:xs) = (belMax x (belMaximum xs))
 
 -- INITS KW
 belInits [] = [[]]
@@ -271,7 +271,10 @@ belIntersect (x:xs) (y:ys)
 
 -- GROUP KW
 belGroup [] = []
-belGroup (x:xs) = [x]:(belGroup xs)
+belGroup (x:xs)
+  | xs == [] = [[x]]
+  | x == head xs = [belTakeWhile (== x) (x:xs)] ++ belGroup (belDropWhile (== x) xs)
+  | otherwise = [[x]] ++ belGroup xs
 
 -- SPLITAT KW
 belSplitAt n [] = (belTake n [], belDrop n [])
@@ -279,7 +282,7 @@ belSplitAt n (x:xs) = (belTake n (x:xs), belDrop n (x:xs))
 
 -- PARTITION KW
 belPartition f [] = ([],[])
-belPartition f l = (filter f l, filter (\n -> not (f n)) l)
+belPartition f l = (belFilter f l, belFilter (\n -> not (f n)) l)
 
 -- REPLICATE KW
 belReplicate 0 _ = []
@@ -313,14 +316,14 @@ belFib 2 = 1
 belFib n = belFib (n - 2) + belFib (n - 1)
 
 -- FIBBO LIST
-belFibL n = map belFib [1..n]
+belFibL n = belMap belFib [1..n]
 
 -- PASCAL
 belPascal 1 = [1]
-belPascal n = zipWith (+) (0:(belPascal (pred n))) (belPascal (pred n) ++ [0])
+belPascal n = belZipWith (+) (0:(belPascal (pred n))) (belPascal (pred n) ++ [0])
 
 -- PASCAL LIST
-belPascalL n = map belPascal [1..n]
+belPascalL n = belMap belPascal [1..n]
 
 -- PRIME
 -- PRIME BELOW
