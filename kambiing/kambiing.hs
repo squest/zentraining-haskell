@@ -193,6 +193,14 @@ tails' (x:xs) = (x:xs) : tails' xs
 inits' [] = [[]]
 inits' xs = (map' reverse' (reverse' (tails' (reverse' xs))))
 
-intersect' [] = []
-intersect' (x:xs)
-        |
+intersect' _ [] = []
+intersect' [] _ = []
+intersect' (x:xs) ys
+        | elem' x ys = x : intersect' xs ys
+        | otherwise = intersect' xs ys
+
+group' [] = []
+group' xs = takeWhile' (== head' xs) xs : group' (dropWhile (== head' xs) xs)
+
+splitAt' _ [] = []
+splitAt' n xs = [take n xs] ++ [drop n xs]
