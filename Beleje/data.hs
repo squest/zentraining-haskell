@@ -9,4 +9,7 @@ triangles = belScanl1 (+) [0..]
 -- PENTAGONAL
 
 -- FACTORIAL LIST
-factorials = belMap (\a -> (belFoldl1 (*) [1..a])) [1..]
+factorials1 = belScanl1 (*) [1..]
+factorials2 = belMap (\a -> (belFoldl1 (*) [1..a])) [1..]
+
+--
