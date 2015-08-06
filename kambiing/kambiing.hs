@@ -229,7 +229,13 @@ fak x = foldl1'' (*) [1..x]
 fakList x = scanl1' (*) [1..x]
 
 
-sieveN n = sieve [2..n]
+sieve n = sieveNaive [2..n]
 
-sieve [] = []
-sieve (x:xs) = x : sieve (filter (\n -> (0 /= rem n x)) xs)
+--batas buat akar N masih rusak
+sieveX [] = []
+sieveX (x:xs)
+  | x < round(sqrt(last xs)) = x : sieveX (filter (\n -> (0 /= rem n x)) xs)
+  | otherwise = x:xs
+
+sieveNaive [] = []
+sieveNaive (x:xs) = x : sieveNaive (filter (\n -> (0 /= rem n x)) xs)
