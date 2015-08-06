@@ -289,8 +289,15 @@ belReplicate 0 _ = []
 belReplicate n l = [l] ++ belReplicate (pred n) l
 
 -- SUBSEQUENCES KW
+belSubsequences [] = [[]]
+belSubsequences (x:xs) = ugly (x:xs) [[]]
+  where ugly (x:xs) res
+          | xs == [] = (res ++ (belMap (++ [x]) res))
+          | otherwise = ugly xs (res ++ (belMap (++ [x]) res))
 
 -- PERMUTATIONS KW
+
+
 
 ---------------------------- 2 Pubs ----------------------------
 -- ITERATE KW
@@ -325,5 +332,12 @@ belPascal n = belZipWith (+) (0:(belPascal (pred n))) (belPascal (pred n) ++ [0]
 -- PASCAL LIST
 belPascalL n = belMap belPascal [1..n]
 
--- PRIME
+-- ISPRIME KW ====>>>>> (Si babi masih ga jalan)
+belIsPrime n
+  | n < 2 = False
+  | n == 2 = True
+  | even n = False
+  | otherwise = (any (\a -> ((rem n a) == 0)) [3..(sqrt n)])
+
 -- PRIME BELOW
+belPrimeBelow n = (belFilter (belIsPrime) [2..n])

@@ -218,8 +218,17 @@ repeat' x = x : repeat' x
 
 cycle' x = x ++ cycle' x
 
---(fn [x] (nth (iterate #(conj % (+ (last(butlast %)) (last %) )) [1 1] ) (- x 2) ))
+--(fn [x] (nth (iterate #(conj % (+ (last (butlast %)) (last %) )) [1 1] ) (- x 2) ))
 --translate dari clojure, masih salah
-fibopartial xs = xs ++ [((last (init xs)) + last' xs)]
+fibopartial xs = xs ++ [((last (init xs)) + last xs)]
 fibo 2 = [1,1]
 fibo x = nth (iterate' fibopartial [1,1]) (x - 2)
+
+fak x = foldl1'' (*) [1..x]
+
+fakList x = scanl1' (*) [1..x]
+
+sieveN n = sieve [2..n]
+
+sieve (x:[]) = []
+sieve (x:xs) = x : sieve (filter (\n -> (0 == rem x n)) xs)
