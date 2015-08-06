@@ -297,7 +297,14 @@ belSubsequences (x:xs) = ugly (x:xs) [[]]
 
 -- PERMUTATIONS KW
 
+belHaha n (y:ys) = (map (\a -> [n] ++ a) (belPermutations (y:ys)))
 
+belPermutations [] = [[]]
+belPermutations (x:[]) = [[x]]
+belPermutations (x:xs) = iter 0 (x:xs)
+  where iter i l
+          | (length l - i) == 1 = belHaha (nth l i) (delete (nth l i) l)
+          | otherwise = (belHaha (nth l i) (delete (nth l i) l)) ++ (iter (succ i) l)
 
 ---------------------------- 2 Pubs ----------------------------
 -- ITERATE KW
@@ -332,12 +339,19 @@ belPascal n = belZipWith (+) (0:(belPascal (pred n))) (belPascal (pred n) ++ [0]
 -- PASCAL LIST
 belPascalL n = belMap belPascal [1..n]
 
--- ISPRIME KW ====>>>>> (Si babi masih ga jalan)
+-- ISPRIME KW
 belIsPrime n
   | n < 2 = False
   | n == 2 = True
   | even n = False
-  | otherwise = (any (\a -> ((rem n a) == 0)) [3..(sqrt n)])
+  | otherwise = all (\x -> (rem n x) /= 0) (belTakeWhile (\x -> x < n) [3,5..])
+
+sIsPrime n
+  | n < 2 = False
+  | n == 2 = True
+  | even n = False
+  | otherwise = all (\x -> (rem n x) /= 0) (belTakeWhile (\x -> x <= div x n) [3,5..])
+
 
 -- PRIME BELOW
-belPrimeBelow n = (belFilter (belIsPrime) [2..n])
+belPrimeBelow n = (belFilter (sIsPrime) [2..n])
