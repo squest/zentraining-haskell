@@ -218,7 +218,7 @@ repeat' x = x : repeat' x
 
 cycle' x = x ++ cycle' x
 
-fak x = foldl1'' (*) [1..x]
+fak x = foldl1 (*) [1..x]
 
 fakList x = scanl1' (*) [1..x]
 
@@ -242,3 +242,23 @@ fiboList n
   | n == 1 = [1]
   | n == 2 = [1,1]
   |otherwise = nth (iterate fibopartial [1,1,2]) (n - 3)
+
+binomialCoef n k = round $ fak n / ((fak k) * (fak (n - k)))
+
+binomialCoefUse n = round $ fak (head n) / ((fak (last n)) * (fak ((head n) - (last n))))
+
+--2,1
+--3,1 3,2
+--4,1 4,2 4,3
+--5,1 5,2 5,3 5,4
+--6,1 6,2 6,3 6,4 6,5
+--7,1 7,2 7,3 7,4 7,5 7,6
+
+rangeFrom1 y = [1..y]
+
+susunPascUse x y = susunPasc x (rangeFrom1 y)
+
+susunPasc _ [] = []
+susunPasc x (y:ys) = [x,y] : susunPasc x ys
+
+pascalTriangle x = map binomialCoefUse (susunPascUse x (pred x))
