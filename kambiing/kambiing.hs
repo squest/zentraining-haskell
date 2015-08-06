@@ -180,3 +180,46 @@ all' f (x) = and' (map' f x)
 any' f (x) = or' (map' f x)
 
 insert' x (xs) = x:xs
+
+nub' [] = []
+nub' (x:xs) = x : (nub' (deleteAll' x xs))
+
+union' [] [] = []
+union' xs ys = nub' (xs ++ ys)
+
+tails' [] = [[]]
+tails' (x:xs) = (x:xs) : tails' xs
+
+inits' [] = [[]]
+inits' xs = (map' reverse' (reverse' (tails' (reverse' xs))))
+
+intersect' _ [] = []
+intersect' [] _ = []
+intersect' (x:xs) ys
+        | elem' x ys = x : intersect' xs ys
+        | otherwise = intersect' xs ys
+
+group' [] = []
+group' xs = takeWhile' (== head' xs) xs : group' (dropWhile (== head' xs) xs)
+
+splitAt' _ [] = []
+splitAt' n xs = [take n xs] ++ [drop n xs]
+
+partition' _ [] = []
+partition' f xs = [filter' f xs] ++ [filter' (\n -> not (f n)) xs]
+
+replicate' 0 [] = []
+replicate' n xs = take' n ([xs] ++ replicate' (pred n) xs)
+
+
+iterate' f x = x : iterate' f (f x)
+
+repeat' x = x : repeat' x
+
+cycle' x = x ++ cycle' x
+
+--(fn [x] (nth (iterate #(conj % (+ (last(butlast %)) (last %) )) [1 1] ) (- x 2) ))
+--translate dari clojure, masih salah
+fibopartial xs = xs ++ [((last (init xs)) + last' xs)]
+fibo 2 = [1,1]
+fibo x = nth (iterate' fibopartial [1,1]) (x - 2)
