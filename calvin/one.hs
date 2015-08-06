@@ -242,6 +242,12 @@ tails' [] = [[]]
 tails' (x) = x:tails' (tail' x)
 
 -- union
+union' [] (y) = y
+union' (x) [] = x
+union' (x) (y:ys)
+  | any' (\a -> a==y) x = union' (x) ys
+  | otherwise =  union' (x++[y]) ys
+
 -- intersect
 -- group
 group' [] = []
