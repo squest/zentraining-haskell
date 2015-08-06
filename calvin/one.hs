@@ -218,7 +218,13 @@ zipWith3' f (x1:x1s) (x2:x2s) (x3:x3s) = (f x1 x2 x3):zipWith3' f x1s x2s x3s
 -- 1B. REIMPLEMENT A BIT GROWN TODDLER STUFFS
 
 -- nub
+nub' [] = []
+nub' (x:xs) = x:nub' (deleteAll' x xs)
+
 -- sort
+sort' [] = []
+sort' (x) = minimum' x: sort' (delete' (minimum' x) x)
+
 -- minimum
 minimum' [x] = x
 minimum' (x:xs) = min' x (minimum' xs)
@@ -238,6 +244,9 @@ tails' (x) = x:tails' (tail' x)
 -- union
 -- intersect
 -- group
+group' [] = []
+group' (x:xs) = takeWhile' (\a -> a==x) (x:xs) :group' (dropWhile' (\a -> a==x) (x:xs))
+
 -- splitAt
 splitAt' n (x) = (take' n x):(drop' n x):[]
 
@@ -270,6 +279,8 @@ fak' 0 = 1
 fak' n = n * fak' (n-1)
 
 -- fakList
+fakList' [] = []
+fakList' x = map fak' x
 
 -- 4. BONUSES 
 -- subsequences
