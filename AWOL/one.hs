@@ -28,8 +28,10 @@ delete' n (x:xs)
 
 -- nub, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
 
+sort' [] = []
+sort' (x:xs) = if (any (\a -> a < x) xs) then sort' (xs ++ [x]) else [x] ++ [sort' xs]
 
---sort, scanl, scanl1, inits, tails
+-- scanl, scanl1, inits, tails
 
 elem' _ [] = False
 elem' n (x:xs)
@@ -52,19 +54,14 @@ last' (x:xs) = last' xs
 length' [] = 0
 length' (x:xs) = 1 + length' xs
 
-init' [] = []
-init' (x:xs) = [x]
+init' [] = [] --butlast
+init' (x:xs)
+  | length (x:xs) == 1 = []
+  | otherwise = [x] ++ init' xs
 
-tail' [] = []
+tail' [] = [] --rest
 tail' [x] = [x]
-tail' (x:xs) = tail' xs
-
---tails' [] = []
---tails' (x:xs)
---  | = tail' xs
-
---init' [] = []
---init' (x:xs) = [x]
+tail' (x:xs) = xs
 
 max' a b
   | a > b = a
@@ -78,7 +75,7 @@ maximum' (x:y:xs)
   | xs == [] = if x > y then x else y
   | otherwise = maximum' (y:xs)
 
-maximum'' (x:xs) 
+maximum'' (x:xs)
   | xs == [] = x
   | otherwise = max' x (maximum'' xs)
 
@@ -95,8 +92,9 @@ product' [] = 1
 product' (x:xs) = x * product' xs
 
 --splitAt' n (x:y:xs)
---  | n == 0 = (x:y:xs)
---  | = (x ++ y) : splitAt' (pred n) xs
+  -- | n == 0 = (x:y:xs)
+  -- | n == 1 = [] : [x] ++ [y]
+  -- | otherwise = [x] ++ [y]
 
 --words' "x"
 --  | x == " " = []
