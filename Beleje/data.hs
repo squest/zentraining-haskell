@@ -17,4 +17,4 @@ factorials2 = belMap (\a -> (belFoldl1 (*) [1..a])) [1..]
 fibbos = 0:1:belZipWith (+) fibbos (tail fibbos)
 
 -- POWER OF
-powerOf = (\a -> (belScanl1 (*) (cycle [a])))
+powerOf = (\a -> (belScanl (*) 1 (cycle [a])))
