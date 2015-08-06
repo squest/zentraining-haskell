@@ -14,6 +14,14 @@ fibo = 1:2:zipWith (+) fibo (tail fibo)
 
 pascal = iterate (\x -> zipWith (+) (0:x) (reverse $ 0:x)) [1]
 
+squares = map (\x -> x*x) [1..]
+
+power2 = iterate (*2) 1
+
+triangles = scanl1 (+) [1..]
+
+
+
 
 
 
