@@ -228,14 +228,15 @@ fak x = foldl1'' (*) [1..x]
 
 fakList x = scanl1' (*) [1..x]
 
+sieve n = sieveX [2..n]
 
-sieve n = sieveNaive [2..n]
-
---batas buat akar N masih rusak
+--bener
 sieveX [] = []
 sieveX (x:xs)
-  | x < round(sqrt(last xs)) = x : sieveX (filter (\n -> (0 /= rem n x)) xs)
-  | otherwise = x:xs
+  | x == 2 = x : sieveX (filter odd xs)
+  | x < round(sqrt $ fromIntegral(last xs)) = x : sieveX (filter (\n -> (0 /= rem n x)) xs)
+  | otherwise = x : xs
 
-sieveNaive [] = []
-sieveNaive (x:xs) = x : sieveNaive (filter (\n -> (0 /= rem n x)) xs)
+--no, sqrt N (slow)
+--sieveNaive [] = []
+--sieveNaive (x:xs) = x : sieveNaive (filter (\n -> (0 /= rem n x)) xs)
