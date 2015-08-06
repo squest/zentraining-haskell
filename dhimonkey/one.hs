@@ -30,7 +30,7 @@ map' f (x:xs) = (f x) : (map' f xs)
 
 filter' f [] = []
 filter' f (x:xs)
-  | (f x) = x : filter' f xs
+  | (f x)  = x : filter' f xs
   | otherwise = filter' f xs
 -- tanya sabda
 -- knp nggak filter' f (x:xs)
@@ -67,18 +67,16 @@ nth' (x:xs) a
 
 --sort' [] = []
 --sort' (x:xs)
-  -- | x == pred (xs) = x : sort' xs
-  -- | otherwise = sort' (xs ++ [x])
+-- | x == pred (x = x : sort' xs
+-- | otherwise = sort' (xs ++ [x])
 
 scanl' f a [] = [a]
 scanl' f a (x:xs) = (a : (scanl' f (f a x) xs))
 
 scanl1' f [] = []
 scanl1' f [a] = [a]
-scanl1' f (x:xs) = x : (scanl1' f xs)
+scanl1' f (x:xs) = (scanl' f x xs)
 
--- scanl1' (+) [1,2,3] = 1 : ((+) 1 (scanl1 (+) [2,3]))
---                       1 : (+) 1 2 : scanl1 (+) [3]
 
 elem' x [] = False
 elem' a (x:xs)
@@ -112,6 +110,38 @@ init' [x] = []
 init' (x:xs) = x : init' xs
 init' [] = error "won't work, yo mama so fat!!"
 
+
+
+
+last' [x] = x
+last' (x:xs) = last' xs
+last' [] = error "won't work, yo mama so fat!"
+
+
+
+max' a b
+  | a > b = a
+  | otherwise = a
+
+min' a b
+  | a > b = b
+  | otherwise = a
+
+
+concat' [] = []
+concat' [[]] = []
+concat' [[a]] = [a]
+concat' (x:xs) = x ++ concat' xs
+
+intersperse' _ [] = []
+intersperse' a [b,c] = [b,a,c]
+intersperse' a (x:xs) = x:a:(intersperse' a xs)
+
+intercalate' a [] = []
+intercalate' a [[]] = []
+intercalate' a [b] = b
+intercalate' (a) (x:xs) = (x ++ a) ++ intercalate' a xs
+
 and' [] = True
 and' (x:xs)
    | x == False = False
@@ -123,26 +153,29 @@ or' (x:xs)
    | otherwise = True
 
 
-
-last' [x] = x
-last' (x:xs) = last' xs
-last' [] = error "won't work, yo mama so fat!"
-
-repeat' x = x : repeat' x
+zip3' [] _ _ = []
+zip3' _ [] _ = []
+zip3' _ _ [] = []
+zip3' (x:xs) (y:ys) (z:zs) = (x,y,z) : zip3' (xs)(ys)(zs)
 
 
-concat' [] = []
-concat' [[]] = []
-concat' [[a]] = [a]
-concat' (x:xs) = x ++ concat' xs
+sum' [] = 0
+sum' (x:xs) = x + (sum' xs)
 
-max' a b
-  | a > b = a
-  | otherwise = a
+product' [] = 1
+product' (x:xs) = x * (product' xs)
 
-min' a b
-  | a > b = b
-  | otherwise = a
+--splitAt' _ [] = ([],[])
+--splitAt' 0 [x] = ([],[x])
+--splitAt a (x:xs) = ([x]++(splitAt' (a-1) xs))
+
+words' "" = []
+words' (x:xs)
+  | x == ' ' = words' xs
+  | otherwise = x : words' xs
+
+--words' "12 231"
+
 
 maximum' [a] = a
 maximum' (x:xs) = max x (maximum xs)
@@ -163,23 +196,13 @@ inits' (x:xs) = inits' [x] ++ (inits' xs)
 --intersect'
 
 
-intersperse' _ [] = []
-intersperse' a [b,c] = [b,a,c]
-intersperse' a (x:xs) = x:a:(intersperse' a xs)
 
-intercalate' a [] = []
-intercalate' a [[]] = []
-intercalate' a [b] = b
-intercalate' (a) (x:xs) = (x ++ a) ++ intercalate' a xs
+
 
 group' [a] = [[a]]
 group' (x:xs) = [x] : group' xs
 
 
-zip3' [] _ _ = []
-zip3' _ [] _ = []
-zip3' _ _ [] = []
-zip3' (x:xs) (y:ys) (z:zs) = (x,y,z) : zip3' (xs)(ys)(zs)
 
 --sort' [] = []
 --sort' (x:y:ys)
@@ -199,18 +222,6 @@ zip3' (x:xs) (y:ys) (z:zs) = (x,y,z) : zip3' (xs)(ys)(zs)
 
 insert' a (x:xs) = a:(x:xs)
 
-sum' [] = 0
-sum' (x:xs) = x + (sum' xs)
-
-product' [] = 1
-product' (x:xs) = x * (product' xs)
-
---splitAt' _ [] = ([],[])
---splitAt' 0 [x] = ([],[x])
---splitAt a (x:xs) = ([x]++(splitAt' (a-1) xs))
-
-words' "" = []
-words' a = [a]
 
 
 
@@ -228,6 +239,8 @@ words' a = [a]
 --subsequences' [] = [[]]
 --subsequences' [a] = [[], [a]]
 --subsequences' (x:xs) = [[x]] ++ subsequences' xs
+
+repeat' x = x : repeat' x
 
 cycle' (x:xs) = x:xs ++ cycle' (x:xs)
 cycle' [] = error "won't work, yo mama so fat!"
