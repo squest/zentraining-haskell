@@ -31,11 +31,16 @@ delete' n (x:xs)
 any' f [] = False
 any' f (x:xs) = if (f x) == True then True else any' f xs
 
-
 sort' [] = []
 sort' (x:xs) = if (any' (\a -> a < x) xs) then sort' (xs ++ [x]) else [x] ++ sort' xs
 
--- scanl, scanl1, inits, tails
+-- scanl, scanl1,
+
+inits' [] = [[]]
+inits' xs = inits' (init' xs) ++ [xs]
+
+tails' [] = [[]]
+tails' xs = xs : tails' (tail' xs)
 
 elem' _ [] = False
 elem' n (x:xs)
@@ -64,7 +69,6 @@ init' (x:xs)
   | otherwise = [x] ++ init' xs
 
 tail' [] = [] --rest
-tail' [x] = [x]
 tail' (x:xs) = xs
 
 max' a b
@@ -96,7 +100,7 @@ or' [] = False
 or' (x:xs) = if x == True then True else or' xs
 
 
--- and, or, group, zip3,
+-- group, zip3
 
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
@@ -107,10 +111,8 @@ product' (x:xs) = x * product' xs
 splitAt' _ [] = []
 splitAt' n x = take n x : [drop n x]
 
---words' "x"
---  | x == " " = []
---  | otherwise = ["x"]
-
 -- words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all,
 
---  insert, partition, zipWith3
+insert' a [] = [a]
+insert' a (x:xs) = if a > x then (x:xs) ++ [a] else a : (x:xs)
+-- partition, zipWith3
