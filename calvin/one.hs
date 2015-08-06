@@ -160,17 +160,23 @@ sum' (x:xs) = x+sum' xs
 product' [] = 1
 product' (x:xs) = x*sum' xs
 
---words AOISDOIAJDOIJASOJDOAISJDOIADIOASPJDASJIPDASJIDJSAPODJASOJPOASJADO
--- words' "" = []
--- words' (x:xs)
---   | x == ' ' =
---   | otherwise = x:
+--words 
+words' "" = []
+words' (x) 
+  | head x == ' ' = words' (tail x)
+  | otherwise = takeWhile' (\a -> (a /= ' ')) x: words' (dropWhile' (\a -> (a /= ' ')) x)
 
 --lines
+lines' "" = []
+lines' (x) = takeWhile' (\a -> (a /= '\n')) x: lines' (tail (dropWhile' (\a -> (a /= '\n')) x))
+
+--unwords
+unwords' (x) = intercalate' " " x
 
 --unlines
---unwords
-
+unlines' [] = ""
+unlines' (x) = intercalate' "\n" x ++ "\n"
+ 
 --takeWhile
 takeWhile' _ [] = []
 takeWhile' f (x:xs)
@@ -264,3 +270,7 @@ fak' 0 = 1
 fak' n = n * fak' (n-1)
 
 -- fakList
+
+-- 4. BONUSES 
+-- subsequences
+-- permutations
