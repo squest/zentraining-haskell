@@ -238,14 +238,11 @@ sieveX (x:xs)
 
 fibopartial (x:xs) = (x:xs) ++ [(last (init xs) + last xs)]
 
-fiboList n
-  | n == 1 = [1]
-  | n == 2 = [1,1]
-  |otherwise = nth (iterate fibopartial [1,1,2]) (n - 3)
+fiboList n = nth (iterate fibopartial [1,1,2]) (n - 3)
 
 binomialCoef n k = round $ fak n / ((fak k) * (fak (n - k)))
 
-binomialCoefUse n = round $ fak (head n) / ((fak (last n)) * (fak ((head n) - (last n))))
+binomialCoefPasc n = round $ fak (head n) / ((fak (last n)) * (fak ((head n) - (last n))))
 
 --2,1
 --3,1 3,2
@@ -256,9 +253,9 @@ binomialCoefUse n = round $ fak (head n) / ((fak (last n)) * (fak ((head n) - (l
 
 rangeFrom1 y = [1..y]
 
-susunPascUse x y = susunPasc x (rangeFrom1 y)
-
 susunPasc _ [] = []
 susunPasc x (y:ys) = [x,y] : susunPasc x ys
+susunPascUse x y = susunPasc x (rangeFrom1 y)
 
-pascalTriangle x = map binomialCoefUse (susunPascUse x (pred x))
+pascalTriangle 0 = [1]
+pascalTriangle x = 1:(reverse $ 1 : map binomialCoefPasc (susunPascUse x (pred x)))
