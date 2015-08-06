@@ -322,7 +322,7 @@ belFact n = n * (belFact (pred n))
 
 -- FACTORIAL LIST
 belFactL 0 = [1]
-belFactL n = n:(belFactL (pred n))
+belFactL n = (belMap belFact [1..n])
 
 -- FIBBO
 belFib 1 = 1
