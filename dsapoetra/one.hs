@@ -2,17 +2,6 @@ module One where
 
 import Data.List
 
-square x = x*x
-
-tes =[1,2,3,4]
-
-sqr x = x*x
-
-cube x = x*x*x
-cons x xs =x:xs
-
-multiple3 = (3*)
-
 mutlak x = if x>0 then x else (- x)
 
 mutlak' x
@@ -41,20 +30,17 @@ isPrime x
     -- | n > i = res
 -- | otherwise = iter (n+1) (res*n)
 
-
-
-
-
-
 -- 1a- Reimplement :
 
 -- do not use any other function except : pred, succ, ++, :, pattern matching, |
 --pattern match use only (x:xs)/(x:[]). do not use (x:y:xs)
 
--- null X, take X, drop X, fst X, snd X, map, filter, delete, deleteAll, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
---csort, scanl, scanl1, elem, notElem, head X, length X, reverse X, last X, tail X, init X, max, min, concat, intersperse, intercalate,
+-- null X, take X, drop X, fst X, snd X,  delete X,
+-- csort, scanl, scanl1, elem X, notElem X, head X, length X, reverse X, last X, tail X, init X, max X, min X, concat, intersperse,
+-- intercalate,
 -- and X, or X, zip3, sum X,
---product, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, zipWith3
+-- product, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, zipWith3, map, filter,
+-- deleteAll, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth X,
 
 testcase = [1,2,3,4]
 
@@ -117,3 +103,46 @@ length' (x:xs) = 1+length' (xs)
 
 reverse' [] = []
 reverse' x = last' x:reverse' (init' x) -- everything i used here is predefined by me
+
+delete' i [] = []
+delete' i (x:xs)
+  | i == x = xs
+  | otherwise = test x
+  where test x
+          | i == (head' xs) = x:(tail' xs)
+          | otherwise = x:delete' i xs
+
+--deleteAll i [] =[]
+--deleteAll i (x:xs) = deleteAll i (delete' i (x:xs))
+-- foldl = function nerima function dan elemen, dan list outputnya adalah elemen
+
+max' x y
+  | x > y = x
+  | x < y = y
+  | otherwise = x
+
+min' x y
+  | x > y = y
+  | x < y = x
+  | otherwise = x
+
+elem' i [] = False
+elem' i (x:xs)
+  | i == x = True
+  | otherwise = elem' i xs
+
+notElem' i [] = True
+notElem' i (x:xs)
+  | i == x = False
+  | otherwise = notElem' i xs
+
+nth [x] 0 = x
+nth (x:xs) i
+  | i == 0 = x
+  | otherwise = nth xs (i-1)
+
+zip' [] [] = []
+zip' [x] [] = []
+zip' [] [x] = []
+zip' (x:xs) (y:ys)
+  | length' (x:xs) == length' (y:ys) = "lol"
