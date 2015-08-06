@@ -28,8 +28,12 @@ delete' n (x:xs)
 
 -- nub, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
 
+any' f [] = False
+any' f (x:xs) = if (f x) == True then True else any' f xs
+
+
 sort' [] = []
-sort' (x:xs) = if (any (\a -> a < x) xs) then sort' (xs ++ [x]) else [x] ++ sort' xs
+sort' (x:xs) = if (any' (\a -> a < x) xs) then sort' (xs ++ [x]) else [x] ++ sort' xs
 
 -- scanl, scanl1, inits, tails
 
@@ -80,10 +84,19 @@ maximum'' (x:xs)
   | otherwise = max' x (maximum'' xs)
 
 minimum' (x:y:xs)
-    | xs == [] = if x < y then x else y
-    | otherwise = minimum' (y:xs)
+  | xs == [] = if x < y then x else y
+  | otherwise = minimum' (y:xs)
 
--- concat, union, intersect, intersperse, intercalate, and, or, group, zip3,
+-- concat, union, intersect, intersperse, intercalate,
+
+and' [] = True
+and' (x:xs) = if x == True then and' xs else False
+
+or' [] = False
+or' (x:xs) = if x == True then True else or' xs
+
+
+-- and, or, group, zip3,
 
 sum' [] = 0
 sum' (x:xs) = x + sum' xs
@@ -92,14 +105,12 @@ product' [] = 1
 product' (x:xs) = x * product' xs
 
 splitAt' _ [] = []
-
-splitAt' n (x:xs)
-  | n == 0 = []
-  | n == 1 = [x] : [xs]
-  | otherwise = splitAt' (pred n) (([x] ++ [head xs]) : [tail xs])
+splitAt' n x = take n x : [drop n x]
 
 --words' "x"
 --  | x == " " = []
 --  | otherwise = ["x"]
 
--- words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any, insert, partition, zipWith3
+-- words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all,
+
+--  insert, partition, zipWith3
