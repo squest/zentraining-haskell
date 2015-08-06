@@ -45,7 +45,11 @@ permutations' [] = [[]]
 permutations' xs = iter (length xs) (map (\x -> [x]) xs)
   where iter 1 res = res
         iter n res = iter (n-1) waka
-          where waka = concatMap (\x -> map (\k -> x ++ [k]) $ difference xs x) res
+          where waka = concatMap (\x -> map (\k -> k:x) $ difference xs x) res
+
+permutations'' [] = [[]]
+permutations'' (x:xs) = concatMap (\k -> map (\(a,b) -> concat [a,[x],b]) $ map (\x -> splitAt x k) [0..(length k)]) waka
+  where waka = permutations'' xs
 
 nth = (!!)
 
