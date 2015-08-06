@@ -29,7 +29,7 @@ delete' n (x:xs)
 -- nub, foldl, foldl1, zip, zipWith, (!!) -> ganti jadi nth,
 
 sort' [] = []
-sort' (x:xs) = if (any (\a -> a < x) xs) then sort' (xs ++ [x]) else [x] ++ [sort' xs]
+sort' (x:xs) = if (any (\a -> a < x) xs) then sort' (xs ++ [x]) else [x] ++ sort' xs
 
 -- scanl, scanl1, inits, tails
 
@@ -91,10 +91,12 @@ sum' (x:xs) = x + sum' xs
 product' [] = 1
 product' (x:xs) = x * product' xs
 
---splitAt' n (x:y:xs)
-  -- | n == 0 = (x:y:xs)
-  -- | n == 1 = [] : [x] ++ [y]
-  -- | otherwise = [x] ++ [y]
+splitAt' _ [] = []
+
+splitAt' n (x:xs)
+  | n == 0 = []
+  | n == 1 = [x] : [xs]
+  | otherwise = splitAt' (pred n) (([x] ++ [head xs]) : [tail xs])
 
 --words' "x"
 --  | x == " " = []
