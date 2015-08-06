@@ -228,7 +228,8 @@ fak x = foldl1'' (*) [1..x]
 
 fakList x = scanl1' (*) [1..x]
 
+
 sieveN n = sieve [2..n]
 
-sieve (x:[]) = []
-sieve (x:xs) = x : sieve (filter (\n -> (0 == rem x n)) xs)
+sieve [] = []
+sieve (x:xs) = x : sieve (filter (\n -> (0 /= rem n x)) xs)
