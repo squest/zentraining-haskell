@@ -78,7 +78,7 @@ maximum' (x:y:xs)
   | xs == [] = if x > y then x else y
   | otherwise = maximum' (y:xs)
 
-maximum'' (x:xs)
+maximum'' (x:xs) 
   | xs == [] = x
   | otherwise = max' x (maximum'' xs)
 
