@@ -23,7 +23,11 @@ powerOfb = (nth (belMap (\a -> belMap (a ^) [0,1..]) [0,1..]))
 pascals = belIterate (\a -> belZipWith (+) (0:a) (belReverse (0:a))) [1]
 
 -- PRIME (Ga bisa prime, babay)
+primes = filter (\a -> all (\b -> (rem a b) /= 0) (takeWhile (\v -> v * v <= a) primes)) (iterate succ 2)
 
 -- PRIMORIALS
 
 -- SUMPRIME
+
+-- PALINDROMES
+pals = (belFilter (\a -> (show a) == reverse (show a)) [1..])
