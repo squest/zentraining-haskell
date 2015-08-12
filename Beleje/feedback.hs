@@ -61,6 +61,9 @@ belPermutations (x:xs) = iter 0 (x:xs)
   where iter i l
           | (length l - i) == 1 = belHaha (nth l i) (delete (nth l i) l)
           | otherwise = (belHaha (nth l i) (delete (nth l i) l)) ++ (iter (succ i) l)
+          
+          
+powerOf = (!!) (map (\x -> iterate (*x) 1) [0..])
 
 
 
