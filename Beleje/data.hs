@@ -10,17 +10,20 @@ triangles = belScanl1 (+) [0..]
 pentagonals = 0:belScanl1 (+) [1,4..]
 
 -- FACTORIAL LIST
-factorials1 = belScanl1 (*) [1..]
-factorials2 = belMap (\a -> (belFoldl1 (*) [1..a])) [1..]
+factorials = belMap (\a -> (belFoldl1 (*) [1..a])) [1..]
 
 -- FIBBO LIST
 fibbos = 0:1:belZipWith (+) fibbos (tail fibbos)
 
 -- POWER OF
-powerOfa = (\a -> (belScanl (*) 1 (cycle [a])))
-
-powerOfb = (*)
-powerOfbb i = belScanl powerOfb 1 (cycle [i])
-
+powerOfa = (\a -> (belScanl (*) 1 (belCycle [a])))
+powerOfb = (nth (belMap (\a -> belMap (a ^) [0,1..]) [0,1..]))
 
 -- PASCAL
+pascals = belIterate (\a -> belZipWith (+) (0:a) (belReverse (0:a))) [1]
+
+-- PRIME (Ga bisa prime, babay)
+
+-- PRIMORIALS
+
+-- SUMPRIME
