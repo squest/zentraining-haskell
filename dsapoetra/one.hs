@@ -36,16 +36,20 @@ isPrime x
 --pattern match use only (x:xs)/(x:[]). do not use (x:y:xs)
 --24
 -- null X, take X, drop X, fst X, snd X,  delete X, elem X, notElem X, head X, length X, reverse X, last X, tail X, init X, max X, min X, and X, or X,  sum X,
--- foldl X,  (!!) -> ganti jadi nth X,insert X, zipWith3, map X,
+-- foldl X,  (!!) -> ganti jadi nth X,insert X, zipWith3, map X, zip X
 
 --22
---  product, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any,  filter,zip3,
---csort, scanl, scanl1, concat, intersperse, deleteAll, foldl1, zip, zipWith,intercalate,
+--  product, words, lines, unlines, unwords, takeWhile, dropWhile, concatMap, all, any,  filter X,zip3,
+--csort, scanl, scanl1, concat, intersperse, deleteAll, foldl1, , zipWith X,intercalate,
 testcase = [1,2,3,4]
 
 null' [] = True
 null'(x:xs) = False
 
+filter' f [] = []
+filter' f (x:xs)
+  | f x == True = x: filter' f xs
+  | otherwise = filter' f xs
 
 take' i [] = []
 take' i (x:xs)
@@ -141,11 +145,19 @@ nth (x:xs) i
   | otherwise = nth xs (i-1)
 
 -- Yang ini da
-zip' [] [] = []
-zip' (x:xs) (y:ys)
-  | length' (x:xs) == length' (y:ys) = [(x,y)]:zip' xs ys
-  | length' (x:xs) > length' (y:ys) = zip' (take' (length' (y:ys)) x:xs) (y:ys)
-  | length' (x:xs) < length' (y:ys) = zip' (x:xs) (take' (length' (x:xs)) y:ys)
+-- zip' [] [] = []
+-- zip' (x:xs) (y:ys)
+  -- | length' (x:xs) == length' (y:ys) = [(x,y)]:zip' xs ys
+  -- | length' (x:xs) > length' (y:ys) = zip' (take' (length' (y:ys)) x:xs) (y:ys)
+  -- | length' (x:xs) < length' (y:ys) = zip' (x:xs) (take' (length' (x:xs)) y:ys)
+
+zip' _ [] = []
+zip' [] _ = []
+zip' (x:xs) (y:ys) = (x,y) : zip' xs ys
+
+zipWith' f _ [] = []
+zipWith' f [] _ = []
+zipWith' f (x:xs) (y:ys) = (f) x y : zipWith' f xs ys
 
 foldla' func i [] = i
 foldla' func i (x:xs) = foldla' func (func i x) xs
