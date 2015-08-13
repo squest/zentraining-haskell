@@ -178,7 +178,7 @@ words' (x:xs)
 
 
 maximum' [a] = a
-maximum' (x:xs) = max x (maximum xs)
+maximum' (x:xs) = max x (maximum' xs)
 
 minimum' [a] = a
 minimum' (x:xs) = min x (minimum' xs)
