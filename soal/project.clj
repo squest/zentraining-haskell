@@ -21,7 +21,7 @@
                  [selmer "0.9.2"]
                  [hickory "0.5.4"]
                  ;;datomic
-                 [com.datomic/datomic-free "0.9.5327"]]
+                 [com.datomic/datomic-free "0.9.5130"]]
   :profiles {:dev {:source-paths ["dev"]}}
   :resource-paths ["resources"]
   :main ^{:skip-aot true} soal.server)
